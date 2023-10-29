@@ -1,0 +1,8 @@
+spring:
+  codec:
+    max-in-memory-size: 10MB
+  cloud:
+    azure:
+      storage:
+        account-name: azstrogeu001
+        account-key: ${AZ_STORAGE_ACCOUNT_KEY}
