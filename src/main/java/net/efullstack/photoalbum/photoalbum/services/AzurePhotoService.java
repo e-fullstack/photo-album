@@ -1,5 +1,6 @@
 package net.efullstack.photoalbum.photoalbum.services;
 
+import com.azure.storage.blob.BlobAsyncClient;
 import com.azure.storage.blob.BlobServiceAsyncClient;
 import com.azure.storage.blob.models.BlobItem;
 import com.azure.storage.blob.models.ParallelTransferOptions;
@@ -9,6 +10,8 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.nio.ByteBuffer;
 
 @Service
 @RequiredArgsConstructor
@@ -34,4 +37,13 @@ public class AzurePhotoService implements PhotoService {
                 .listBlobs()
                 .map(BlobItem::getName);
     }
+
+    @Override
+    public Flux<ByteBuffer> viewPhoto(String albumId, String photoId) {
+        return blobServiceAsyncClient
+                .getBlobContainerAsyncClient(albumId)
+                .getBlobAsyncClient(photoId)
+                .downloadStream();
+    }
+
 }

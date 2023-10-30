@@ -14,6 +14,8 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.nio.ByteBuffer;
+
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
@@ -34,10 +36,22 @@ public class Routers {
                 .path("/{albumId}/photo", builder -> builder
                         .GET("", this::albumPhotos)
                         .POST("", this::upload)
-                        .GET("/{id}", request -> ServerResponse.noContent().build())
+                        .GET("/{id}", this::viewPhoto)
                         .PUT("/{id}", request -> ServerResponse.noContent().build())
                         .DELETE("/{id}", request -> ServerResponse.noContent().build()))
                 .build();
+    }
+
+    private Mono<ServerResponse> viewPhoto(ServerRequest request) {
+        var albumId = request.pathVariable("albumId");
+        var photoId = request.pathVariable("id");
+        return ServerResponse
+                .ok()
+//                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+//                .header("Content-Disposition", "inline")
+//                .header("Content-Disposition", "attachment")
+//                .header("Content-Disposition", "attachment; filename=\"%s\"".formatted(fileName))
+                .body(photoService.viewPhoto(albumId,photoId), ByteBuffer.class);
     }
 
     private Mono<ServerResponse> albumPhotos(ServerRequest request) {
