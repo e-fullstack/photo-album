@@ -18,7 +18,9 @@
         <div id="app" class="container">
             <h1>{{ message }}</h1>
 
-            <p class="error" v-if="Object.keys(error).length > 0">{{error}}</p>
+            <div class="alert alert-danger" role="alert" v-if="Object.keys(error).length > 0">
+                {{error}}!
+            </div>
 
             <div id="album">
                 selected: {{picked}}

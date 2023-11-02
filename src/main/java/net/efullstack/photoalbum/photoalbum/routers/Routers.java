@@ -6,6 +6,7 @@ import net.efullstack.photoalbum.photoalbum.services.AlbumService;
 import net.efullstack.photoalbum.photoalbum.services.PhotoService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
@@ -47,6 +48,7 @@ public class Routers {
         var photoId = request.pathVariable("id");
         return ServerResponse
                 .ok()
+                .contentType(MediaType.IMAGE_JPEG)
 //                .contentType(MediaType.APPLICATION_OCTET_STREAM)
 //                .header("Content-Disposition", "inline")
 //                .header("Content-Disposition", "attachment")
