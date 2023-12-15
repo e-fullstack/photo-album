@@ -3,17 +3,14 @@ package net.efullstack.photoalbum.photoalbum.services;
 import com.azure.storage.blob.BlobContainerAsyncClient;
 import com.azure.storage.blob.BlobServiceAsyncClient;
 import com.azure.storage.blob.models.BlobContainerItem;
-import com.azure.storage.blob.models.BlobItem;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
-
 @Service
 @RequiredArgsConstructor
-public class AzureAlbumService implements AlbumService {
+public class AlbumServiceAzure implements AlbumService {
     private final BlobServiceAsyncClient blobServiceAsyncClient;
 
     @Override

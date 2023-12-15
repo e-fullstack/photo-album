@@ -1,6 +1,5 @@
 package net.efullstack.photoalbum.photoalbum.services;
 
-import com.azure.storage.blob.BlobAsyncClient;
 import com.azure.storage.blob.BlobServiceAsyncClient;
 import com.azure.storage.blob.models.BlobItem;
 import com.azure.storage.blob.models.ParallelTransferOptions;
@@ -16,7 +15,7 @@ import java.nio.ByteBuffer;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AzurePhotoService implements PhotoService {
+public class PhotoServiceAzure implements PhotoService {
 
     private final BlobServiceAsyncClient blobServiceAsyncClient;
     @Override
